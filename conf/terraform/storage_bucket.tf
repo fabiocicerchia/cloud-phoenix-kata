@@ -2,6 +2,18 @@ resource "aws_s3_bucket" "cpk-bucket" {
   acl    = "private"
   bucket = var.s3_bucket
 
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    enabled = true
+
+    noncurrent_version_expiration {
+      days = 7
+    }
+  }
+
   tags = {
     Terraform   = "true"
     Author      = "fabiocicerchia"

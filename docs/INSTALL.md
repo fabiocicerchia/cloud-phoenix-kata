@@ -8,7 +8,8 @@
 
 ## Configuration
 
-Rename the `.env-dist` file to `.env` and change the `OWNER_ID` variable (use your own AWS Owner ID)
+ 1. Rename the `.env-dist` file to `.env` and change the `OWNER_ID` variable (use your own AWS Owner ID).
+ 2. Fill the AWS credentials in the file `conf/k8s/secrets.yaml`.
 
 ## Install on DEV
 

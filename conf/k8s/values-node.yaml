@@ -8,8 +8,7 @@ extraEnv:
  - name: "PORT"
    value: "3000"
  - name: "DB_CONNECTION_STRING"
-   value: "mongodb://user:secret_password@endpoint-node-mongodb:27017/test_db"
-#mongodb.ingress.enabled: true
-
-#mongodb.install: false
-#externaldb.secretName: my-database-secret
+   valueFrom:
+      secretKeyRef:
+        name: credentials
+        key: DB_CONNECTION_STRING

@@ -8,6 +8,9 @@ module "eks" {
   subnets      = [aws_subnet.cpk-zones[0].id, aws_subnet.cpk-zones[1].id, aws_subnet.cpk-zones[2].id]
   vpc_id       = aws_vpc.cpk-vpc.id
 
+  cluster_enabled_log_types     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  cluster_log_retention_in_days = 7
+
   worker_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
   #map_roles                            = var.map_roles
   #map_users                            = var.map_users
@@ -15,57 +18,57 @@ module "eks" {
 
   worker_groups = [
     {
-      instance_type = "t2.small"
-      asg_desired_capacity = 2
+      instance_type                 = "t2.small"
+      asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
 
       tags = [
         {
-          key = "Terraform"
-          value = "true"
+          key                 = "Terraform"
+          value               = "true"
           propagate_at_launch = true
         },
         {
-          key = "Author"
-          value = "fabiocicerchia"
+          key                 = "Author"
+          value               = "fabiocicerchia"
           propagate_at_launch = true
         },
         {
-          key = "Environment"
-          value = "base"
+          key                 = "Environment"
+          value               = "base"
           propagate_at_launch = true
         },
         {
-          key = "Service"
-          value = "cloud-phoenix-kata"
+          key                 = "Service"
+          value               = "cloud-phoenix-kata"
           propagate_at_launch = true
         }
       ]
     },
     {
-      instance_type = "t2.medium"
-      asg_desired_capacity = 1
+      instance_type                 = "t2.medium"
+      asg_desired_capacity          = 1
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
 
       tags = [
         {
-          key = "Terraform"
-          value = "true"
+          key                 = "Terraform"
+          value               = "true"
           propagate_at_launch = true
         },
         {
-          key = "Author"
-          value = "fabiocicerchia"
+          key                 = "Author"
+          value               = "fabiocicerchia"
           propagate_at_launch = true
         },
         {
-          key = "Environment"
-          value = "base"
+          key                 = "Environment"
+          value               = "base"
           propagate_at_launch = true
         },
         {
-          key = "Service"
-          value = "cloud-phoenix-kata"
+          key                 = "Service"
+          value               = "cloud-phoenix-kata"
           propagate_at_launch = true
         }
       ]

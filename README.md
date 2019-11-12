@@ -6,7 +6,7 @@
 
  - [Terraform](https://www.terraform.io/)
  - [Kubernetes](https://kubernetes.io/) + [Helm](https://helm.sh/)
- - [AWS EKS](https://aws.amazon.com/eks/)
+ - [minikube](https://minikube.sigs.k8s.io/) / [AWS EKS](https://aws.amazon.com/eks/)
  - [TravisCI](https://travis-ci.org/)
 
 ## Documentation

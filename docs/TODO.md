@@ -1,4 +1,3 @@
- - 13/11 [ ] Backup the logs and database with rotation of 7 days
  - 13/11 [-] Scale when the number of request are greater than 10 req /sec
 
 # Extras

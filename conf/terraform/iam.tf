@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "cpk-ECRPush" {
-  name        = "cpk-ECRPush"
-  path        = "/"
+  name = "cpk-ECRPush"
+  path = "/"
 
   policy = templatefile("conf/terraform/files/aws_policies/ecr-push.json", {
     region : var.region,
