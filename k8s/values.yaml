@@ -1,0 +1,14 @@
+# More details about this config file here:
+# https://github.com/bitnami/charts/blob/master/bitnami/node/values.yaml
+
+image.tag: 8.11.1-prod
+repository: https://github.com/xpeppers/cloud-phoenix-kata.git
+extraEnv:
+ - name: "PORT"
+   value: "3000"
+ - name: "DB_CONNECTION_STRING"
+   value: "mongodb://user:secret_password@cloud-phoenix-kata-mongodb:27017/test_db"
+#mongodb.ingress.enabled: true
+
+#mongodb.install: false
+#externaldb.secretName: my-database-secret
