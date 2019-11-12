@@ -14,4 +14,4 @@
        NOTE: Easy way: Use [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html) to get an alert about it.
        Complex way: Add an additional [service](https://hub.helm.sh/charts/stable/sysdig) to monitor the whole cluster health status.
  - [X] Implements a CI/CD pipeline for the code
- - [-] Scale when the number of request are greater than 10 req /sec
+ - [ ] Scale when the number of request are greater than 10 req /sec
