@@ -3,11 +3,12 @@
 
 image.tag: 8.11.1-prod
 repository: https://github.com/xpeppers/cloud-phoenix-kata.git
+replicas: 3
 extraEnv:
  - name: "PORT"
    value: "3000"
  - name: "DB_CONNECTION_STRING"
-   value: "mongodb://user:secret_password@cloud-phoenix-kata-mongodb:27017/test_db"
+   value: "mongodb://user:secret_password@endpoint-node-mongodb:27017/test_db"
 #mongodb.ingress.enabled: true
 
 #mongodb.install: false

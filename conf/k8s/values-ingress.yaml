@@ -1,0 +1,5 @@
+# More details about this config file here:
+# https://hub.helm.sh/charts/stable/nginx-ingress
+
+defaultBackend.name: cloud-phoenix-kata-node
+defaultBackend.port: 80

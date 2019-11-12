@@ -1,10 +1,11 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: endpoint-ingress
-  namespace: default
+  namespace: cloud-phoenix-kata
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
   - http:
