@@ -20,7 +20,7 @@ http://127.0.0.1:3000
  - [X] You must release your work with an OSI-approved open source license of your choice.
  - [X] You must deliver the sources, with a README that explains how to run it.
  - [X] Add the code to your own Github account and send us the link.
- - [ ] You must pay attention to some unwanted features that were introduced during development. In particular:
+ - [X]  You must pay attention to some unwanted features that were introduced during development. In particular:
    - GET /crash kill the application process
    - GET /generatecert is not optimized and creates resource consumption peaks
  - [ ] Automate the creation of the infrastructure and the setup of the application.
@@ -31,3 +31,4 @@ http://127.0.0.1:3000
  - [X] Implements a CI/CD pipeline for the code
  - [-] Scale when the number of request are greater than 10 req /sec
  - [X] submodule the external repo
+ - [ ] Test if the app responds in CI
