@@ -5,4 +5,4 @@ minikube addons disable metrics-server
 minikube delete
 
 # Using K8S v1.15.4 fixes: https://github.com/helm/helm/issues/6374
-minikube start --extra-config=kubelet.authentication-token-webhook=true --kubernetes-version=1.15.4 --vm-driver=none --cpus 2 --memory 2048
+minikube start --extra-config=kubelet.authentication-token-webhook=true --kubernetes-version=1.15.4 --vm-driver=$VM_DRIVER --cpus 2 --memory 2048

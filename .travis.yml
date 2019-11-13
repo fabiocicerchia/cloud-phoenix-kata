@@ -2,7 +2,7 @@ language: generic
 
 env:
   global:
-    - NO_PORT_FORWARD=true
+    - VM_DRIVER=none
     - SKIP_IAAC=true
 
 install:
@@ -17,10 +17,8 @@ install:
   - mkdir $HOME/.minikube
   - sudo chown -R $USER $HOME/.kube $HOME/.minikube
   - sudo apt-get install socat
+  - mv .env-dist .env
 
 script:
   - sudo ./bin/minikube.sh
   - sudo ./bin/setup.sh
-
-tests:
-  - ./bin/tests.sh

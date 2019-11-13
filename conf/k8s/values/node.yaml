@@ -6,7 +6,10 @@ repository: https://github.com/xpeppers/cloud-phoenix-kata.git
 replicas: 3
 extraEnv:
  - name: "PORT"
-   value: "3000"
+   valueFrom:
+     configMapKeyRef:
+       name: configs
+       key: app_port
  - name: "DB_CONNECTION_STRING"
    valueFrom:
       secretKeyRef:

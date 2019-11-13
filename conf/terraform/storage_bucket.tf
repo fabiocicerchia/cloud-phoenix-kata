@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "cpk-bucket" {
     enabled = true
 
     noncurrent_version_expiration {
-      days = 7
+      days = var.retention_days
     }
   }
 

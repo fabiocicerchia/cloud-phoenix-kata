@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: prometheus-adapter
+    chart: {{ .chart }}
+    heritage: Tiller
+    release: {{ .release}}
+  name: {{ .release }}-prometheus-adapter
+  namespace: default
+data:
+  config.yaml: |
+    rules:
+    - seriesQuery: '{__name__= "requests-per-second"}'
+      seriesFilters: []
+      resources:
+        overrides:
+          k8s_namespace:
+            resource: namespace
+          k8s_pod_name:
+            resource: pod
+      name:
+        matches: "requests-per-second"
+        as: ""
+      metricsQuery: <<.Series>>{<<.LabelMatchers>>,container_name!="POD"}

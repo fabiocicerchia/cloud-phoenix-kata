@@ -18,26 +18,33 @@ fi
 
 helm init --wait --upgrade
 helm repo update
+helm repo add bitnami https://charts.bitnami.com/bitnami
 
 kubectl create serviceaccount --namespace kube-system tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
+sleep 10 # wait for tiller to be patched
+
 helm install --name metrics-server stable/metrics-server --version 2.8.8 --set args={"--kubelet-insecure-tls,--kubelet-preferred-address-types=InternalIP"}
 
 kubectl create namespace $K8S_NS
+kubectl apply --namespace $K8S_NS -f conf/k8s/configmaps/generic.yaml
+kubectl apply --namespace $K8S_NS -f conf/k8s/secrets.yaml
 
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --namespace $K8S_NS --name endpoint-node -f conf/k8s/values-node.yaml bitnami/node
-helm install --namespace $K8S_NS --name ingress-controller -f conf/k8s/values-ingress.yaml stable/nginx-ingress --version 1.24.7
+helm install --namespace $K8S_NS --name endpoint-node -f conf/k8s/values/node.yaml bitnami/node
+helm install --namespace $K8S_NS --name ingress-controller -f conf/k8s/values/ingress.yaml stable/nginx-ingress --version 1.24.7
 
-#kubectl apply --namespace $K8S_NS -f conf/k8s/autoscale.yaml
 kubectl apply --namespace $K8S_NS -f conf/k8s/ingress.yaml
+kubectl apply --namespace $K8S_NS -f conf/k8s/autoscale.yaml
 
-INGRESS_IP=`kubectl describe --namespace $K8S_NS ingress endpoint-ingress | grep "Address:" | awk '{ print $2 }'`
-if [ -z $NO_PORT_FORWARD ]; then
-    kubectl port-forward --namespace $K8S_NS ing/endpoint-ingress 8080:80
-    INGRESS_IP="127.0.0.1:8080"
-fi
+echo "Waiting for the Ingress IP Address (max 120s)..."
+COUNT=1
+while [ -z $INGRESS_IP ] && [ $COUNT -lt 12 ]; do
+    sleep 1
+    COUNT=$((COUNT+1))
+    INGRESS_IP=`kubectl describe --namespace $K8S_NS ingress endpoint-ingress | grep "Address:" | awk '{ print $2 }'`
+done
 
-echo "APP available at: http://$INGRESS_IP/"
+echo "APP available at:"
+echo "http://$INGRESS_IP/"

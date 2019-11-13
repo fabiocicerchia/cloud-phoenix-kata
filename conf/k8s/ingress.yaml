@@ -12,7 +12,7 @@ spec:
       paths:
       - path: /(.*)
         backend:
-          serviceName: cloud-phoenix-kata-node
+          serviceName: endpoint-node
           servicePort: 80
       - path: /(crash|generatecert)
         backend:

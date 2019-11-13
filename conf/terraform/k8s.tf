@@ -9,12 +9,9 @@ module "eks" {
   vpc_id       = aws_vpc.cpk-vpc.id
 
   cluster_enabled_log_types     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-  cluster_log_retention_in_days = 7
+  cluster_log_retention_in_days = var.retention_days
 
   worker_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
-  #map_roles                            = var.map_roles
-  #map_users                            = var.map_users
-  #map_accounts                         = var.map_accounts
 
   worker_groups = [
     {

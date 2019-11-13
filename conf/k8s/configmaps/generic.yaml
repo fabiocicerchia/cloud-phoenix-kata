@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configs
+  namespace: cloud-phoenix-kata
+data:
+  app_port: "3000"
+  s3_bucket: "fabiocicerchia-base-cloud-phoenix-kata"
