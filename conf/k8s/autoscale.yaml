@@ -13,14 +13,10 @@ spec:
     kind: Deployment
     name: endpoint-node
   metrics:
-  - type: Object
-    object:
+  - type: Pods
+    pods:
       metric:
         name: requests-per-second
-      describedObject:
-        apiVersion: networking.k8s.io/v1beta1
-        kind: Ingress
-        name: main-route
       target:
         type: Value
-        value: 10
+        averageValue: 10
