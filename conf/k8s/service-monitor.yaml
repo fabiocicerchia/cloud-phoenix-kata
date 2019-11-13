@@ -1,0 +1,12 @@
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: service-monitoring
+  namespace: cloud-phoenix-kata
+spec:
+  selector:
+    matchLabels:
+      app: node
+      release: endpoint-node
+  endpoints: 
+  - port: http

@@ -27,6 +27,8 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 sleep 10 # wait for tiller to be patched
 
 helm install --name metrics-server stable/metrics-server --version 2.8.8 --set args={"--kubelet-insecure-tls,--kubelet-preferred-address-types=InternalIP"}
+helm install --name prometheus-operator bitnami/prometheus-operator --version 0.3.0
+helm install --name prometheus-adapter -f conf/k8s/values/prometheus.yaml stable/prometheus-adapter
 
 kubectl create namespace $K8S_NS
 kubectl apply --namespace $K8S_NS -f conf/k8s/configmaps/generic.yaml
